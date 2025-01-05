@@ -27,12 +27,12 @@ async function main() {
   }
 
   console.log('\n--- Getting tweets from a user ---');
-  const username = await askQuestion('请输入要查看推特的用户名 (不含@): ');
-  const tweetCount = await askQuestion('请输入要获取的推特数量 (默认5): ') || '5';
+  const username = await askQuestion('Enter username to view tweets (without @): ');
+  const tweetCount = await askQuestion('Enter number of tweets to fetch (default 5): ') || '5';
   
   const userTweets = await twitter.getUserTweets(username, parseInt(tweetCount));
   if (userTweets) {
-    console.log(`\n@${username} 的最新推特:`);
+    console.log(`\nLatest tweets from @${username}:`);
     userTweets.forEach((tweet, index) => {
       console.log(`${index + 1}. ${tweet.text}`);
       console.log(`   Posted: ${tweet.created_at}\n`);
@@ -40,12 +40,12 @@ async function main() {
   }
 
   console.log('\n--- Searching for tweets ---');
-  const searchQuery = await askQuestion('请输入搜索关键词: ');
-  const searchCount = await askQuestion('请输入要获取的推特数量 (默认5): ') || '5';
+  const searchQuery = await askQuestion('Enter search keywords: ');
+  const searchCount = await askQuestion('Enter number of tweets to fetch (default 5): ') || '5';
   
   const searchResults = await twitter.searchTweets(searchQuery, parseInt(searchCount));
   if (searchResults) {
-    console.log(`\n关键词 "${searchQuery}" 的搜索结果:`);
+    console.log(`\nSearch results for "${searchQuery}":`);
     searchResults.forEach((tweet, index) => {
       console.log(`${index + 1}. ${tweet.text}`);
       console.log(`   Posted: ${tweet.created_at}\n`);
